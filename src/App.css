@@ -1,0 +1,71 @@
+.app {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  background-color: var(--background-color);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Remove default styles that are no longer needed */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em var(--accent-color-3));
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em var(--accent-color-1));
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #666;
+}
+
+/* Global CSS Variables */
+:root {
+  --text-color: #000000;
+  --background-color: #F3F3F3;
+  --accent-color-1: #ED6A5A;
+  --accent-color-2: #FFB627;
+  --accent-color-3: #4281A4;
+}
+
+.app-container {
+  min-height: 100vh;
+  background-color: var(--background-color);
+}
+
+.content {
+  width: 100%;
+}

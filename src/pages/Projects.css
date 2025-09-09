@@ -1,0 +1,386 @@
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.projects-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.projects-header h1 {
+  font-size: 2.5rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.projects-header p {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.project-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  min-height: 480px;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.project-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--accent-color-3), var(--accent-color-2));
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.05);
+}
+
+.project-status {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+}
+
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.completed {
+  background-color: var(--accent-color-3);
+  color: white;
+}
+
+.status-badge.in-progress {
+  background-color: var(--accent-color-2);
+  color: white;
+}
+
+.project-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-description-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 1.5rem;
+  min-height: 120px !important;
+  max-height: 140px;
+  overflow: hidden;
+  position: relative;
+}
+
+.project-description-container.expanded {
+  max-height: none;
+  overflow: visible;
+}
+
+.project-description {
+  line-height: 1.6;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+/* Better solution for text overflow */
+.project-description-container {
+  position: relative;
+  min-height: 120px !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-description-container:not(.expanded) {
+  max-height: 140px;
+  overflow: hidden;
+}
+
+.project-description-container:not(.expanded) .project-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-bottom: 2.5rem; /* 增加底部留白 */
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+.project-description-container.expanded .project-description {
+  display: block;
+  padding-bottom: 0;
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+.project-description-container:not(.expanded)::after {
+  content: '';
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0;
+  right: 0;
+  height: 2rem;
+  background: linear-gradient(to top, white 80%, transparent);
+  pointer-events: none;
+}
+
+.expand-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: none;
+  border: none;
+  color: var(--accent-color-1);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0;
+  text-decoration: underline;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.project-description-container.expanded .expand-button {
+  position: static;
+  margin-top: 0.5rem;
+}
+
+.expand-button {
+  background: none;
+  border: none;
+  color: var(--accent-color-1);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0;
+  text-decoration: underline;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to top, white 60%, transparent);
+  padding: 0.5rem 0;
+  width: 100%;
+  text-align: left;
+}
+
+.expand-button:hover {
+  opacity: 0.7;
+}
+
+.project-title {
+  font-size: 1.4rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  font-weight: 600;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.project-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  margin-bottom: 1.5rem;
+  min-height: 40px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.tech-tag {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--accent-color-3);
+}
+
+.project-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.project-link {
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-align: center;
+  flex: 1;
+}
+
+.project-link:not(.secondary) {
+  background-color: var(--accent-color-1);
+  color: white;
+  border: 2px solid var(--accent-color-1);
+}
+
+.project-link:not(.secondary):hover {
+  background-color: transparent;
+  color: var(--accent-color-1);
+}
+
+.project-link.secondary {
+  background-color: transparent;
+  color: var(--accent-color-3);
+  border: 2px solid var(--accent-color-3);
+}
+
+.project-link.secondary:hover {
+  background-color: var(--accent-color-3);
+  color: white;
+}
+
+.projects-footer {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 15px;
+  /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); */
+}
+
+.projects-footer p {
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.github-link {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--accent-color-3);
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.github-link:hover {
+  background-color: var(--accent-color-1);
+  transform: translateY(-2px);
+}
+
+/* Updated mobile responsive adjustments */
+@media (max-width: 768px) {
+  .projects-container {
+    padding: 1rem;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .project-actions {
+    flex-direction: column;
+  }
+  
+  .projects-header h1 {
+    font-size: 2rem;
+  }
+  
+  .project-card {
+    min-height: 460px !important;
+  }
+  
+  .project-description-container {
+    min-height: 100px !important;
+  }
+  
+  .expand-button {
+    font-size: 0.85rem;
+  }
+  
+  .project-description-container:not(.expanded) .project-description {
+    -webkit-line-clamp: 3 !important;
+    line-clamp: 3 !important;
+    padding-bottom: 1.8rem;
+  }
+  
+  .project-description-container:not(.expanded) .project-description {
+    padding-bottom: 2.2rem !important;
+  }
+  
+  .project-description-container:not(.expanded)::after {
+    bottom: 1.3rem !important;
+    height: 1.8rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    min-height: 420px !important;
+  }
+  
+  .project-description-container {
+    min-height: 80px !important;
+  }
+  
+  .expand-button {
+    font-size: 0.8rem;
+  }
+  
+  .project-description-container:not(.expanded) .project-description {
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
+    padding-bottom: 1.8rem;
+  }
+  
+  .project-description-container:not(.expanded) .project-description {
+    padding-bottom: 2rem !important;
+  }
+  
+  .project-description-container:not(.expanded)::after {
+    bottom: 1.2rem !important;
+    height: 1.6rem !important;
+  }
+}
