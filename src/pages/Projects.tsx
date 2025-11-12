@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Projects.css';
 import '../styles/shared.css';
 import ProjectModal from '../components/ProjectModal';
-import { projectsData } from '../data/projectsData';
+import { projectsData } from '../data/projects_data';
 
 const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);

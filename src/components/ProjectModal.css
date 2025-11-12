@@ -40,7 +40,64 @@
   line-height: 1.8;
   font-size: 1rem;
   margin-bottom: 1.5rem;
-  white-space: pre-line;
+}
+
+/* Detailed Content Styles */
+.modal-paragraph {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+.modal-heading {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent-color-1);
+}
+
+.modal-heading:first-child {
+  margin-top: 0;
+}
+
+.modal-list {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  line-height: 1.8;
+}
+
+.modal-list li {
+  margin-bottom: 0.5rem;
+  color: #333;
+  position: relative;
+}
+
+.modal-list li::marker {
+  color: var(--accent-color-1);
+  font-weight: 600;
+}
+
+.modal-content-image-wrapper {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.modal-content-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.modal-image-caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
 }
 
 .modal-technologies {

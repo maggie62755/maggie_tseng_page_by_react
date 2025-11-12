@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from './Modal';
 import './ProjectModal.css';
-import type { Project } from '../data/projectsData';
+import type { Project, ProjectContent } from '../data/projects_data';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -11,6 +11,43 @@ interface ProjectModalProps {
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
   if (!project) return null;
+
+  const renderContent = (content: ProjectContent, index: number) => {
+    switch (content.type) {
+      case 'paragraph':
+        return <p key={index} className="modal-paragraph">{content.content}</p>;
+      
+      case 'heading':
+        return <h3 key={index} className="modal-heading">{content.content}</h3>;
+      
+      case 'list':
+        return (
+          <ul key={index} className="modal-list">
+            {content.items?.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        );
+      
+      case 'image':
+        return (
+          <div key={index} className="modal-content-image-wrapper">
+            <img 
+              src={content.src} 
+              alt={content.alt || 'Project image'}
+              className="modal-content-image"
+              onError={(e) => {
+                e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDYwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGM0YzIi8+CjxyZWN0IHg9IjI1MCIgeT0iMTI1IiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiByeD0iNSIgZmlsbD0iIzQyODFBNCIvPgo8dGV4dCB4PSIzMDAiIHk9IjE1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW1hZ2U8L3RleHQ+Cjwvc3ZnPgo=';
+              }}
+            />
+            {content.alt && <p className="modal-image-caption">{content.alt}</p>}
+          </div>
+        );
+      
+      default:
+        return null;
+    }
+  };
 
   return (
     <Modal
@@ -45,7 +82,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
       </div>
 
       <div className="modal-description">
-        {project.description}
+        {project.detailedContent ? (
+          project.detailedContent.map((content, index) => renderContent(content, index))
+        ) : (
+          <p className="modal-paragraph">{project.description}</p>
+        )}
       </div>
 
       <div className="modal-actions">
