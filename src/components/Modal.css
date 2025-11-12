@@ -1,0 +1,156 @@
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease-out;
+  backdrop-filter: blur(2px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Content */
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+  flex: 1;
+  padding-right: 1rem;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.modal-close:hover {
+  background-color: #f0f0f0;
+  color: var(--accent-color-1);
+  transform: rotate(90deg);
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 2rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: var(--accent-color-3);
+  border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color-1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 0.5rem;
+  }
+
+  .modal-content {
+    max-height: 90vh;
+    border-radius: 12px;
+  }
+
+  .modal-header {
+    padding: 1rem 1.5rem;
+  }
+
+  .modal-title {
+    font-size: 1.3rem;
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-header {
+    padding: 1rem;
+  }
+
+  .modal-body {
+    padding: 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+  }
+}

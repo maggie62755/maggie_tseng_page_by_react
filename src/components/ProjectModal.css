@@ -1,0 +1,120 @@
+/* Modal Project Details */
+.modal-project-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.modal-project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.modal-meta-label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.modal-meta-value {
+  font-size: 1rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.modal-description {
+  color: #333;
+  line-height: 1.8;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  white-space: pre-line;
+}
+
+.modal-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.modal-tech-tag {
+  background: linear-gradient(135deg, var(--accent-color-1), var(--accent-color-2));
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.modal-action-button {
+  flex: 1;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-action-button.primary {
+  background-color: var(--accent-color-1);
+  color: white;
+}
+
+.modal-action-button.primary:hover {
+  background-color: var(--accent-color-3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modal-action-button.secondary {
+  background-color: transparent;
+  color: var(--accent-color-3);
+  border: 2px solid var(--accent-color-3);
+}
+
+.modal-action-button.secondary:hover {
+  background-color: var(--accent-color-3);
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal-description {
+    font-size: 0.95rem;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-action-button {
+    flex: none;
+  }
+}

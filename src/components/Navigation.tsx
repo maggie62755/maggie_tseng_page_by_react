@@ -17,7 +17,12 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
     { id: "contact", label: "Contact" },
   ];
 
-  const handleTabChange = (tab: string) => {
+  const handleTabChange = (e: React.MouseEvent<HTMLAnchorElement>, tab: string) => {
+    e.preventDefault(); // Prevent default anchor behavior
+    
+    // Scroll to top immediately
+    window.scrollTo(0, 0);
+    
     onTabChange(tab);
     setIsMobileMenuOpen(false); // Close mobile menu when tab is selected
   };
@@ -25,7 +30,11 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
   return (
     <nav className="navigation">
       <div className="nav-container">
-        <a href="#" className="nav-logo">
+        <a 
+          href="#home" 
+          className="nav-logo"
+          onClick={(e) => handleTabChange(e, 'home')}
+        >
           <img src="images/logo/logo_by_germini.png" alt="Maggie" className="nav-logo-image" />
         </a>
 
@@ -41,12 +50,13 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
         <ul className={`nav-list ${isMobileMenuOpen ? "mobile-open" : ""}`}>
           {tabs.map((tab) => (
             <li key={tab.id} className="nav-item">
-              <button
+              <a
+                href={`#${tab.id}`}
                 className={`nav-button ${activeTab === tab.id ? "active" : ""}`}
-                onClick={() => handleTabChange(tab.id)}
+                onClick={(e) => handleTabChange(e, tab.id)}
               >
                 {tab.label}
-              </button>
+              </a>
             </li>
           ))}
         </ul>

@@ -1,51 +1,19 @@
 import React, { useState } from 'react';
 import './Projects.css';
 import '../styles/shared.css';
+import ProjectModal from '../components/ProjectModal';
+import { projectsData } from '../data/projectsData';
 
 const Projects: React.FC = () => {
-  const [expandedProjects, setExpandedProjects] = useState<Set<number>>(new Set());
+  const [selectedProject, setSelectedProject] = useState<number | null>(null);
 
-  const toggleExpanded = (projectId: number) => {
-    const newExpanded = new Set(expandedProjects);
-    if (newExpanded.has(projectId)) {
-      newExpanded.delete(projectId);
-    } else {
-      newExpanded.add(projectId);
-    }
-    setExpandedProjects(newExpanded);
+  const openModal = (projectId: number) => {
+    setSelectedProject(projectId);
   };
-  const projects = [
-    {
-      id: 1,
-      title: "E-commerce Platform",
-      description: "A full-stack e-commerce web application built with React, Node.js, and MongoDB. Features include user authentication, product catalog, shopping cart, and payment integration with Stripe. This project demonstrates modern web development practices including responsive design, secure authentication, and seamless payment processing.",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe API"],
-      status: "Completed",
-      image: "/api/placeholder/711/400", // 16:9 ratio placeholder
-      link: "#",
-      sourceCode: "#"
-    },
-    {
-      id: 2,
-      title: "Task Management App",
-      description: "A responsive task management application with real-time updates. Users can create, edit, and organize tasks with drag-and-drop functionality. Built with TypeScript for better code maintainability.",
-      technologies: ["TypeScript", "React", "Firebase", "Material-UI"],
-      status: "In Progress",
-      image: "/api/placeholder/711/400", // 16:9 ratio placeholder
-      link: "#"
-      // No sourceCode property - won't show source code button
-    },
-    {
-      id: 3,
-      title: "Weather Dashboard",
-      description: "A beautiful weather dashboard that displays current weather conditions and forecasts for multiple cities using OpenWeatherMap API. Features include interactive charts, geolocation support, and responsive design.",
-      technologies: ["JavaScript", "CSS3", "Weather API", "Chart.js"],
-      status: "Completed",
-      image: "/api/placeholder/711/400", // 16:9 ratio placeholder
-      link: "#",
-      sourceCode: "#"
-    }
-  ];
+
+  const closeModal = () => {
+    setSelectedProject(null);
+  };
 
   return (
     <div className="page-container">
@@ -55,8 +23,12 @@ const Projects: React.FC = () => {
       </div>
       
       <div className="projects-grid">
-        {projects.map(project => (
-          <div key={project.id} className="project-card">
+        {projectsData.map(project => (
+          <div 
+            key={project.id} 
+            className="project-card"
+            onClick={() => openModal(project.id)}
+          >
             <div className="project-image-container">
               <img 
                 src={project.image} 
@@ -75,34 +47,19 @@ const Projects: React.FC = () => {
             
             <div className="project-content">
               <h3 className="project-title">{project.title}</h3>
-              <div className={`project-description-container ${expandedProjects.has(project.id) ? 'expanded' : ''}`}>
+              <div className="project-description-container">
                 <p className="project-description">
-                  {expandedProjects.has(project.id) 
-                    ? project.description 
+                  {project.description.length > 150 
+                    ? `${project.description.substring(0, 150)}...` 
                     : project.description
                   }
                 </p>
-                {project.description.length > 120 && (
-                  <button 
-                    className="expand-button"
-                    onClick={() => toggleExpanded(project.id)}
-                  >
-                    {expandedProjects.has(project.id) ? 'Show Less' : 'Read More'}
-                  </button>
-                )}
               </div>
               
               <div className="project-technologies">
                 {project.technologies.map((tech, index) => (
                   <span key={index} className="tech-tag">{tech}</span>
                 ))}
-              </div>
-              
-              <div className="project-actions">
-                <a href={project.link} className="project-link">View Project</a>
-                {project.sourceCode && (
-                  <a href={project.sourceCode} className="project-link secondary">Source Code</a>
-                )}
               </div>
             </div>
           </div>
@@ -113,6 +70,13 @@ const Projects: React.FC = () => {
         <p>More projects coming soon! Check my GitHub for additional work.</p>
         <a href="#" className="github-link">Visit My GitHub</a>
       </div>
+
+      {/* Project Modal */}
+      <ProjectModal
+        project={selectedProject !== null ? projectsData.find(p => p.id === selectedProject) || null : null}
+        isOpen={selectedProject !== null}
+        onClose={closeModal}
+      />
     </div>
   );
 };
