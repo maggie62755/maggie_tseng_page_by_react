@@ -46,7 +46,7 @@ export const smartUmbrellaStand: ProjectBase = {
     ],
     technologies: ["C", "C++", "Python", "IoT", "Raspberry Pi 3", "MongoDB", "API"],
     status: "Completed",
-    image: "public/images/projects/smart_umbrella_stand.jpeg",
+    image: "/images/projects/smart_umbrella_stand.jpeg",
     link: "https://github.com/maggie62755/Adaptive-MQTT-Transmit-Policy",
     sourceCode: "https://github.com/maggie62755/Adaptive-MQTT-Transmit-Policy"
 };
