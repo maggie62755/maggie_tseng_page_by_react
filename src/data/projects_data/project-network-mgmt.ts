@@ -1,7 +1,6 @@
-import type { Project } from './types';
+import type { ProjectBase } from './types';
 
-export const networkManagement: Project = {
-    id: 2,
+export const networkManagement: ProjectBase = {
     title: "Network Management for Small and Medium-sized Businesses",
     description: "企業/組織用的網路設備管理與監控平台，支援多區域、多角色分區管理，提供豐富的網路拓撲視覺化、設備清單、用戶管理、內容過濾、流量分析等功能。",
     detailedContent: [

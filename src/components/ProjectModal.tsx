@@ -44,6 +44,42 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
           </div>
         );
       
+
+      case 'link':
+        // 支援單一或多個連結，每個 link 一行
+        if (content.links && Array.isArray(content.links)) {
+          return (
+            <div key={index} className="modal-link-wrapper">
+              {content.links.map((link, i) => (
+                <a
+                  key={i}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="modal-link"
+                >
+                  {link.text || link.url}
+                </a>
+              ))}
+            </div>
+          );
+        } else if (content.url) {
+          return (
+            <div key={index} className="modal-link-wrapper">
+              <a
+                href={content.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="modal-link"
+              >
+                {content.text || content.url}
+              </a>
+            </div>
+          );
+        } else {
+          return null;
+        }
+      
       default:
         return null;
     }

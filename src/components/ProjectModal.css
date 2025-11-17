@@ -100,6 +100,44 @@
   font-style: italic;
 }
 
+
+.modal-link-wrapper {
+  margin: 1rem 0;
+}
+
+.modal-link-wrapper .modal-link {
+  display: block;
+  /* margin-bottom: 0.5rem; */
+}
+
+.modal-link-wrapper .modal-link:last-child {
+  margin-bottom: 0;
+}
+
+.modal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-color-3);
+  text-decoration: none;
+  font-weight: 500;
+  /* padding: 0.5rem 1rem; */
+  border-radius: 8px;
+  /* background-color: rgba(66, 129, 164, 0.1); */
+  transition: all 0.3s ease;
+  word-break: break-all;
+}
+
+.modal-link:hover {
+  /* background-color: rgba(66, 129, 164, 0.2); */
+  transform: translateX(4px);
+}
+
+.modal-link::before {
+  content: "🔗";
+  font-size: 1.2rem;
+}
+
 .modal-technologies {
   display: flex;
   flex-wrap: wrap;

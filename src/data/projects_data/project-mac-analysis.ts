@@ -1,7 +1,6 @@
-import type { Project } from './types';
+import type { ProjectBase } from './types';
 
-export const macAnalysis: Project = {
-    id: 4,
+export const macAnalysis: ProjectBase = {
     title: "多時段 MAC 地址行為相似度分析與隨機 MAC 合併工具",
     description: "本專案旨在開發一套工具，用於分析多時段內 MAC 地址的行為相似度，透過數據分析技術，協助用戶識別相似行為模式，協助推論哪些 MAC 屬於同一實體設備，提升網路管理效率。",
     detailedContent: [
