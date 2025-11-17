@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "start": "npm start"
+    "start": "npm run"
   },
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
