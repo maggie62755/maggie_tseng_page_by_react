@@ -27,7 +27,7 @@ export const macAnalysis: ProjectBase = {
         },
         {
             type: 'image',
-            src: '/images/projects/mac_sim.png',
+            src: 'images/projects/mac_sim.png',
             alt: '流程圖'
         },
         {
@@ -80,13 +80,13 @@ export const macAnalysis: ProjectBase = {
         },
         {
             type: 'image',
-            src: "/images/projects/mac_sim_result.png",
+            src: "images/projects/mac_sim_result.png",
             alt: 'MAC行為相似度分析結果範例'
         }
     ],
     technologies: ["Python", "Pandas", "NumPy", "Scikit-learn"],
     status: "Completed",
-    image: "/images/projects/mac_sim_title.png",
+    image: "images/projects/mac_sim_title.png",
     link: "#",
     sourceCode: "#"
 };

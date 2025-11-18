@@ -79,6 +79,6 @@ export const networkManagement: ProjectBase = {
     ],
     technologies: ["Next.js", "React", "TypeScript", "Ant Design", "D3.js"],
     status: "In Progress",
-    image: "/images/projects/genix_biz_home.png",
+    image: "images/projects/genix_biz_home.png",
     link: "#"
 };
