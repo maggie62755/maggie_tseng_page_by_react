@@ -22,7 +22,7 @@ const Life: React.FC = () => {
       title: "同樂管樂團音樂會",
       date: "July 2023",
       description: "從高中畢業後，因為大學不在台北，因而斷了好幾年的管樂演出。這次的音樂會讓我重新找回了對音樂的熱情，也讓我了解到音樂對我來說的力量。重新再拾起樂器的過程很艱辛，枯燥乏味的練習與挫折讓我很想放棄。但最後台上演出時的感動是會讓人記一輩子的",
-      image: "/images/life/2023DTWBperformance.jpg",
+      image: "images/life/2023DTWBperformance.jpg",
       tags: ["Music", "Performance", "Growth"]
     },
     {
@@ -30,7 +30,7 @@ const Life: React.FC = () => {
       title: "Backpacking Through Japan",
       date: "Summer 2023",
       description: "Three weeks exploring Japan taught me so much about minimalism, attention to detail, and finding beauty in simplicity. From Tokyo's bustling streets to Kyoto's serene temples, every moment was a lesson in mindfulness.",
-      image: "/images/life/2024Tokoyo.jpg",
+      image: "images/life/2024Tokoyo.jpg",
       tags: ["Travel", "Culture", "Adventure"]
     },
     {
@@ -38,7 +38,7 @@ const Life: React.FC = () => {
       title: "Volleyball Championship Win",
       date: "October 2023",
       description: "Our team's journey to winning the regional championship was filled with ups and downs. What I learned most was the power of persistence and how individual skills mean nothing without team chemistry.",
-      image: "/images/life/volleyball.jpg",
+      image: "images/life/volleyball.jpg",
       tags: ["Sports", "Teamwork", "Achievement"]
     }
   ];
