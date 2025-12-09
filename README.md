@@ -1,6 +1,7 @@
 # Maggie Tseng Personal Website
 
 This is my personal website and React practice project, built with React, TypeScript, and Vite.
+[link](https://maggie62755.github.io/maggie_tseng_page_by_react/)
 
 ## 📋 Prerequisites
 
