@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from './Modal';
 import './ProjectModal.css';
-import type { Project, ProjectContent } from '../data/projects_data';
+import type { Project, ProjectContent } from '../data/project-index';
 
 interface ProjectModalProps {
   project: Project | null;

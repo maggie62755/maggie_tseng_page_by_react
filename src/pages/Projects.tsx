@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Projects.css';
 import '../styles/shared.css';
 import ProjectModal from '../components/ProjectModal';
-import { projectsData } from '../data/projects_data';
+import { projectsData } from '../data/project-index';
 
 const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
@@ -28,6 +28,7 @@ const Projects: React.FC = () => {
             key={project.id} 
             className="project-card"
             onClick={() => openModal(project.id)}
+            title={project.title}
           >
             <div className="project-image-container">
               <img 
@@ -47,6 +48,7 @@ const Projects: React.FC = () => {
             
             <div className="project-content">
               <h3 className="project-title">{project.title}</h3>
+                <div className="project-date">{project.date && (project.date)}</div>
               <div className="project-description-container">
                 <p className="project-description">
                   {project.description.length > 150 
@@ -68,7 +70,7 @@ const Projects: React.FC = () => {
       
       <div className="projects-footer">
         <p>More projects coming soon! Check my GitHub for additional work.</p>
-        <a href="#" className="github-link">Visit My GitHub</a>
+        <a href="https://github.com/maggie62755" className="github-link">Visit My GitHub</a>
       </div>
 
       {/* Project Modal */}

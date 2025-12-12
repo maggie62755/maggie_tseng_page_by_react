@@ -17,6 +17,7 @@ export interface ProjectBase {
     detailedContent?: ProjectContent[]; // 用於 modal 的詳細內容
     technologies: string[];
     status: string;
+    date?: string; // 專案製作時間（年/月），例如 "2024/10" 或 "2024"
     image: string;
     link: string;
     sourceCode?: string;

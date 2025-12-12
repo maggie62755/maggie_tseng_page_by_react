@@ -1,4 +1,4 @@
-import type { ProjectBase } from './types';
+import type { ProjectBase } from '../project-types';
 
 export const networkManagement: ProjectBase = {
     title: "Network Management for Small and Medium-sized Businesses",
@@ -79,6 +79,7 @@ export const networkManagement: ProjectBase = {
     ],
     technologies: ["Next.js", "React", "TypeScript", "Ant Design", "D3.js"],
     status: "In Progress",
+    date: "2025/10",
     image: "images/projects/genix_biz_home.png",
     link: "#"
 };

@@ -1,4 +1,4 @@
-import type { ProjectBase } from './types';
+import type { ProjectBase } from '../project-types';
 
 export const planetaryTourism: ProjectBase = {
     title: "Planetary Tourism Office",
@@ -34,10 +34,19 @@ export const planetaryTourism: ProjectBase = {
         },{
             type: 'paragraph',
             content: '此專案在NASA舉辦的黑客松競賽中獲得了「2024年黑客松競賽佳作」。'
+        },
+        {
+            type: 'heading',
+            content: '特別感謝'
+        },
+        {
+            type: 'paragraph',
+            content: '特別感謝所有一起參加黑克松競賽熬夜做作品的夥伴們。'
         }
     ],
     technologies: ["JS", "HTML"],
     status: "Completed",
+    date: "2024/10",
     image: "images/projects/planetary-tourism.png",
     link: "https://choutw.github.io/pto2023/login",
     sourceCode: "#"

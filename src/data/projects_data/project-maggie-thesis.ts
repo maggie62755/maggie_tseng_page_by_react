@@ -1,4 +1,4 @@
-import type { ProjectBase } from './types';
+import type { ProjectBase } from '../project-types';
 
 export const maggieThesis: ProjectBase = {
     title: "Cloud MQTT Broker Design for Heterogeneous-Message-Flow Applications",
@@ -61,6 +61,7 @@ export const maggieThesis: ProjectBase = {
     ],
     technologies: ["C", "C++", "MQTT", "Mosquitto"],
     status: "Completed",
+    date: "2022/06",
     image: "images/projects/maggie_thesis.png",
     link: "https://github.com/maggie62755/Adaptive-MQTT-Transmit-Policy",
     sourceCode: "https://github.com/maggie62755/Adaptive-MQTT-Transmit-Policy"

@@ -1,4 +1,4 @@
-import type { ProjectBase } from './types';
+import type { ProjectBase } from '../project-types';
 
 export const macAnalysis: ProjectBase = {
     title: "多時段 MAC 地址行為相似度分析與隨機 MAC 合併工具",
@@ -86,6 +86,7 @@ export const macAnalysis: ProjectBase = {
     ],
     technologies: ["Python", "Pandas", "NumPy", "Scikit-learn"],
     status: "Completed",
+    date: "2025/11",
     image: "images/projects/mac_sim_title.png",
     link: "#",
     sourceCode: "#"

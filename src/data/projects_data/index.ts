@@ -1,15 +1,10 @@
 // 匯出型別
-export type { Project, ProjectBase, ProjectContent } from './types';
+export type { Project, ProjectBase, ProjectContent } from '../project-types';
 
-import { planetaryTourism } from './project-planetary-tourism';
-// 匯入所有專案
-import { ecommercePlatform } from './project-ecommerce';
-import { networkManagement } from './project-network-mgmt';
-import { weatherDashboard } from './project-weather';
-import { macAnalysis } from './project-mac-analysis';
-import { maggieThesis } from './project-maggie-thesis';
-import { smartUmbrellaStand } from './project-umbrella-stand';
-import type { ProjectBase, Project } from './types';
+import type { ProjectBase, Project } from '../project-types';
+
+// 自動匯入所有專案檔案（排除 types.ts 和 index.ts）
+const projectModules = import.meta.glob<{ [key: string]: ProjectBase }>('./project-*.ts', { eager: true });
 
 // 自動分配 id 的輔助函數
 function assignIds(projects: ProjectBase[]): Project[] {
@@ -19,26 +14,12 @@ function assignIds(projects: ProjectBase[]): Project[] {
     }));
 }
 
-// 專案列表（不含 id）
-const projectsList: ProjectBase[] = [
-    maggieThesis,
-    smartUmbrellaStand,
-    networkManagement,
-    weatherDashboard,
-    macAnalysis,
-    planetaryTourism
-];
+// 從所有模組中提取專案資料
+const projectsList: ProjectBase[] = Object.values(projectModules).flatMap(module => 
+    Object.values(module).filter((value): value is ProjectBase => 
+        typeof value === 'object' && value !== null && 'title' in value
+    )
+);
 
 // 匯出所有專案陣列（自動分配 id）
 export const projectsData: Project[] = assignIds(projectsList);
-
-// 也可以個別匯出，方便單獨使用
-export {
-    maggieThesis,
-    smartUmbrellaStand,
-    ecommercePlatform,
-    networkManagement,
-    weatherDashboard,
-    macAnalysis,
-    planetaryTourism
-};

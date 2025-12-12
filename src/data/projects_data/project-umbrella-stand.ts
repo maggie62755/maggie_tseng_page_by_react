@@ -1,4 +1,4 @@
-import type { ProjectBase } from './types';
+import type { ProjectBase } from '../project-types';
 
 export const smartUmbrellaStand: ProjectBase = {
     title: "Smart Umbrella Stand 智慧共享雨傘租借系統",
@@ -46,6 +46,7 @@ export const smartUmbrellaStand: ProjectBase = {
     ],
     technologies: ["C", "C++", "Python", "IoT", "Raspberry Pi 3", "MongoDB", "API"],
     status: "Completed",
+    date: "2021/06",
     image: "images/projects/smart_umbrella_stand.jpeg",
     link: "https://github.com/maggie62755/Adaptive-MQTT-Transmit-Policy",
     sourceCode: "https://github.com/maggie62755/Adaptive-MQTT-Transmit-Policy"
