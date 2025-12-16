@@ -19,9 +19,6 @@
   flex-direction: row;
   height: fit-content;
   min-height: 320px;
-}ont-size: 2.5rem;
-  color: var(--text-color);
-  margin-bottom: 0.5rem;
 }
 
 .life-header p {
