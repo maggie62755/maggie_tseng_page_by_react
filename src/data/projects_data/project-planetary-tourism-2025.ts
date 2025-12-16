@@ -55,7 +55,7 @@ export const planetaryTourism2025: ProjectBase = {
     technologies: ["JS", "TS", "CSS", "REACT", "HTML", "Copilot"],
     status: "Completed",
     image: "images/projects/planetary-tourism-2025-game.png",
-    link: "https://maggie62755.github.io/pto2025/login",
+    link: "https://maggie62755.github.io/pto2025/",
     sourceCode: "#",
     date: "2025/12"
 };
