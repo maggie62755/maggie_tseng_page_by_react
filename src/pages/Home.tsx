@@ -6,9 +6,11 @@ const Home: React.FC = () => {
     <div className="home-container">
       <div className="profile-section">
         <div className="avatar-container">
-          <div className="avatar-placeholder">
-            <span>Photo</span>
-          </div>
+          <img 
+            src="images/maggie.jpeg" 
+            alt="Maggie Tseng" 
+            className="avatar-image"
+          />
         </div>
         <div className="intro-section">
           <h1 className="name">MAGGIE TSENG</h1>
