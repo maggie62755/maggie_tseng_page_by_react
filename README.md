@@ -3,13 +3,13 @@
 This is my personal website and React practice project, built with React, TypeScript, and Vite.
 [link](https://maggie62755.github.io/maggie_tseng_page_by_react/)
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have the following installed on your machine:
 - **Node.js** (version 16 or higher)
 - **npm** or **yarn** package manager
 
-## 🚀 Getting Started
+## Getting Started
 
 Follow these steps to get the project running locally:
 
@@ -34,7 +34,7 @@ npm run dev
 
 The application will start and be available at `http://localhost:5173` (or another port if 5173 is occupied).
 
-## 📜 Available Scripts
+## Available Scripts
 
 In the project directory, you can run:
 
@@ -63,7 +63,7 @@ In the project directory, you can run:
 - **React Icons** - Icon library
 - **ESLint** - Code linting
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 maggie_tseng_page_by_react/
@@ -78,7 +78,7 @@ maggie_tseng_page_by_react/
 └── README.md        # This file
 ```
 
-## 🌐 Deployment
+## Deployment
 
 To deploy this project:
 
@@ -89,14 +89,14 @@ To deploy this project:
 
 2. The `dist` folder will contain the production-ready files that can be deployed to any static hosting service.
 
-## 📝 Development Notes
+## Development Notes
 
 - This project uses Vite for fast development and building
 - TypeScript is configured for type safety
 - ESLint is set up for code quality
 - Hot Module Replacement (HMR) is enabled for fast development
 
-## 🤝 Contributing
+## Contributing
 
 Feel free to fork this project and submit pull requests for any improvements!
 
