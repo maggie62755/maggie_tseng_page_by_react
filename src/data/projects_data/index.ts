@@ -15,8 +15,8 @@ function assignIds(projects: ProjectBase[]): Project[] {
 }
 
 // 從所有模組中提取專案資料
-const projectsList: ProjectBase[] = Object.values(projectModules).flatMap(module => 
-    Object.values(module).filter((value): value is ProjectBase => 
+const projectsList: ProjectBase[] = Object.values(projectModules).flatMap(module =>
+    Object.values(module).filter((value): value is ProjectBase =>
         typeof value === 'object' && value !== null && 'title' in value
     )
 );

@@ -100,7 +100,6 @@
   font-style: italic;
 }
 
-
 .modal-link-wrapper {
   margin: 1rem 0;
 }
@@ -145,7 +144,11 @@
 }
 
 .modal-tech-tag {
-  background: linear-gradient(135deg, var(--accent-color-1), var(--accent-color-2));
+  background: linear-gradient(
+    135deg,
+    var(--accent-color-1),
+    var(--accent-color-2)
+  );
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 20px;
@@ -211,5 +214,113 @@
 
   .modal-action-button {
     flex: none;
+  }
+}
+
+/* ========================================
+   Zoomable Images & Lightbox
+   ======================================== */
+
+.zoomable-image {
+  cursor: zoom-in;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.3s ease;
+}
+
+.zoomable-image:hover {
+  transform: scale(1.015);
+  filter: brightness(1.03);
+}
+
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
+  animation: lightboxFadeIn 0.2s ease-out forwards;
+}
+
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 90%;
+  max-height: 90vh;
+  position: relative;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  cursor: zoom-out;
+  animation: lightboxZoomIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 3rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 100001;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.lightbox-close:hover {
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.lightbox-caption {
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 1.2rem;
+  font-size: 0.95rem;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.6;
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightboxZoomIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }

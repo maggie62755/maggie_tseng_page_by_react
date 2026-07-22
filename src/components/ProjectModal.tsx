@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from './Modal';
 import './ProjectModal.css';
 import type { Project, ProjectContent } from '../data/project-index';
@@ -10,6 +10,18 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && lightboxImage) {
+        setLightboxImage(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxImage]);
+
   if (!project) return null;
 
   const renderContent = (content: ProjectContent, index: number) => {
@@ -35,7 +47,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
             <img 
               src={content.src} 
               alt={content.alt || 'Project image'}
-              className="modal-content-image"
+              className="modal-content-image zoomable-image"
+              onClick={() => {
+                if (content.src) {
+                  setLightboxImage({ src: content.src, alt: content.alt || '' });
+                }
+              }}
               onError={(e) => {
                 e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDYwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGM0YzIi8+CjxyZWN0IHg9IjI1MCIgeT0iMTI1IiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiByeD0iNSIgZmlsbD0iIzQyODFBNCIvPgo8dGV4dCB4PSIzMDAiIHk9IjE1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW1hZ2U8L3RleHQ+Cjwvc3ZnPgo=';
               }}
@@ -46,7 +63,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
       
 
       case 'link':
-        // 支援單一或多個連結，每個 link 一行
         if (content.links && Array.isArray(content.links)) {
           return (
             <div key={index} className="modal-link-wrapper">
@@ -86,56 +102,77 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      title={project.title}
-    >
-      <img 
-        src={project.image} 
-        alt={project.title}
-        className="modal-project-image"
-        onError={(e) => {
-          e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzExIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDcxMSA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI3MTEiIGhlaWdodD0iNDAwIiBmaWxsPSIjRjNGM0YzIi8+CjxyZWN0IHg9IjMwNSIgeT0iMTc1IiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiByeD0iNSIgZmlsbD0iIzQyODFBNCIvPgo8dGV4dCB4PSIzNTUiIHk9IjIwNSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW1hZ2U8L3RleHQ+Cjwvc3ZnPgo=';
-        }}
-      />
-      
-      <div className="modal-project-meta">
-        <div className="modal-meta-item">
-          <span className="modal-meta-label">Status</span>
-          <span className={`modal-meta-value status-badge ${project.status.toLowerCase().replace(' ', '-')}`}>
-            {project.status}
-          </span>
-        </div>
-        <div className="modal-meta-item">
-          <span className="modal-meta-label">Technologies</span>
-          <div className="modal-technologies">
-            {project.technologies.map((tech, index) => (
-              <span key={index} className="modal-tech-tag">{tech}</span>
-            ))}
+    <>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        title={project.title}
+      >
+        <img 
+          src={project.image} 
+          alt={project.title}
+          className="modal-project-image zoomable-image"
+          onClick={() => setLightboxImage({ src: project.image, alt: project.title })}
+          onError={(e) => {
+            e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzExIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDcxMSA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI3MTEiIGhlaWdodD0iNDAwIiBmaWxsPSIjRjNGM0YzIi8+CjxyZWN0IHg9IjMwNSIgeT0iMTc1IiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiByeD0iNSIgZmlsbD0iIzQyODFBNCIvPgo8dGV4dCB4PSIzNTUiIHk9IjIwNSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW1hZ2U8L3RleHQ+Cjwvc3ZnPgo=';
+          }}
+        />
+        
+        <div className="modal-project-meta">
+          <div className="modal-meta-item">
+            <span className="modal-meta-label">Status</span>
+            <span className={`modal-meta-value status-badge ${project.status.toLowerCase().replace(' ', '-')}`}>
+              {project.status}
+            </span>
+          </div>
+          <div className="modal-meta-item">
+            <span className="modal-meta-label">Technologies</span>
+            <div className="modal-technologies">
+              {project.technologies.map((tech, index) => (
+                <span key={index} className="modal-tech-tag">{tech}</span>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="modal-description">
-        {project.detailedContent ? (
-          project.detailedContent.map((content, index) => renderContent(content, index))
-        ) : (
-          <p className="modal-paragraph">{project.description}</p>
-        )}
-      </div>
+        <div className="modal-description">
+          {project.detailedContent ? (
+            project.detailedContent.map((content, index) => renderContent(content, index))
+          ) : (
+            <p className="modal-paragraph">{project.description}</p>
+          )}
+        </div>
 
-      <div className="modal-actions">
-        <a href={project.link} className="modal-action-button primary">
-          View Project
-        </a>
-        {project.sourceCode && (
-          <a href={project.sourceCode} className="modal-action-button secondary">
-            Source Code
+        <div className="modal-actions">
+          <a href={project.link} target="_blank" rel="noopener noreferrer" className="modal-action-button primary">
+            View Project
           </a>
-        )}
-      </div>
-    </Modal>
+          {project.sourceCode && (
+            <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" className="modal-action-button secondary">
+              Source Code
+            </a>
+          )}
+        </div>
+      </Modal>
+
+      {/* Image Lightbox Overlay */}
+      {lightboxImage && (
+        <div className="lightbox-overlay" onClick={() => setLightboxImage(null)}>
+          <button className="lightbox-close" onClick={() => setLightboxImage(null)}>
+            &times;
+          </button>
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <img 
+              src={lightboxImage.src} 
+              alt={lightboxImage.alt} 
+              className="lightbox-image"
+              onClick={() => setLightboxImage(null)}
+            />
+            {lightboxImage.alt && <p className="lightbox-caption">{lightboxImage.alt}</p>}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

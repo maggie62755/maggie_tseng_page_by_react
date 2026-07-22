@@ -11,20 +11,16 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
 
   const tabs = [
     { id: "home", label: "Home" },
-    { id: "resume", label: "Resume" },
     { id: "projects", label: "Projects" },
+    { id: "resume", label: "Resume" },
     { id: "life", label: "Life" },
     { id: "contact", label: "Contact" },
   ];
 
   const handleTabChange = (e: React.MouseEvent<HTMLAnchorElement>, tab: string) => {
-    e.preventDefault(); // Prevent default anchor behavior
-    
-    // Scroll to top immediately
-    window.scrollTo(0, 0);
-    
+    e.preventDefault();
     onTabChange(tab);
-    setIsMobileMenuOpen(false); // Close mobile menu when tab is selected
+    setIsMobileMenuOpen(false);
   };
 
   return (

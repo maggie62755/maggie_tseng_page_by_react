@@ -1,71 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* Global CSS Variables */
+:root {
+  /* Warm & Soft Palette */
+  --background-color: #FDFBF7; /* Warm White */
+  --text-color: #334155;        /* Slate 700 - Soft Dark */
+  --heading-color: #1E293B;     /* Slate 800 - Darker for headings */
+  
+  /* Accents */
+  --accent-color-1: #E07A5F;    /* Soft Terracotta */
+  --accent-color-2: #F4D35E;    /* Sunny Yellow */
+  --accent-color-3: #81B29A;    /* Sage Green (Complementary) */
+  --accent-color-4: #3D405B;    /* Deep Indigo for specific UI adjustments */
+
+  /* Gradients */
+  --gradient-main: linear-gradient(135deg, var(--accent-color-1), var(--accent-color-2));
+  --gradient-text: linear-gradient(135deg, var(--accent-color-4), var(--accent-color-1));
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  --blur-amount: 12px;
+
+  /* Font */
+  --font-main: 'Outfit', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  overflow-x: hidden; /* Prevent horizontal scroll from animations */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
+  font-family: var(--font-main);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
 .app {
   min-height: 100vh;
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  position: relative;
 }
 
 .main-content {
   flex: 1;
   width: 100%;
-  background-color: var(--background-color);
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  z-index: 10;
 }
 
-/* Remove default styles that are no longer needed */
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em var(--accent-color-3));
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em var(--accent-color-1));
+.section-block {
+  width: 100%;
+  position: relative;
 }
 
-@keyframes logo-spin {
+/* Utilities */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur-amount));
+  -webkit-backdrop-filter: blur(var(--blur-amount));
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 16px;
+}
+
+.gradient-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* Animations */
+@keyframes fadeInUp {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }
 
-.card {
-  padding: 2em;
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(224, 122, 95, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(224, 122, 95, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(224, 122, 95, 0);
+  }
 }
 
-.read-the-docs {
-  color: #666;
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0; /* Initially hidden */
 }
 
-/* Global CSS Variables */
-:root {
-  --text-color: #000000;
-  --background-color: #F3F3F3;
-  --accent-color-1: #ED6A5A;
-  --accent-color-2: #FFB627;
-  --accent-color-3: #4281A4;
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
-.app-container {
-  min-height: 100vh;
-  background-color: var(--background-color);
+/* Scroll Reveal Utility */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
 }
 
-.content {
-  width: 100%;
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
+
+/* Mouse Follower Removed */
+
+/* Scroll Bar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+

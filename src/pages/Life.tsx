@@ -44,42 +44,44 @@ const Life: React.FC = () => {
   ];
 
   return (
-    <div className="page-container">
+    <div className="page-container life-container">
       <div className="page-header">
-        <h1>My Life</h1>
-        <p>Beyond coding - the things that inspire and energize me</p>
+        <h1 className="reveal" style={{ transitionDelay: '0.1s' }}>My Life</h1>
+        <p className="reveal" style={{ transitionDelay: '0.2s' }}>Beyond coding - the things that inspire and energize me</p>
       </div>
-      
+
       <div className="life-grid">
-        {lifeItems.map(item => (
-          <div key={item.id} className="life-card">
+        {lifeItems.map((item, index) => (
+          <div key={item.id} className="life-card reveal" style={{ transitionDelay: `${(index % 3) * 0.1}s` }}>
             <div className="life-icon">{item.icon}</div>
             <h3 className="life-title">{item.title}</h3>
             <p className="life-description">{item.description}</p>
           </div>
         ))}
       </div>
-      
+
       <div className="life-experiences">
-        <h2>Experiences</h2>
-        <p className="experiences-subtitle">
+        <h2 className="reveal" style={{ transitionDelay: '0.5s' }}>Experiences</h2>
+        <p className="experiences-subtitle reveal" style={{ transitionDelay: '0.6s' }}>
           Stories and insights from my journey of growth and discovery
         </p>
-        
+
         <div className="experiences-grid">
-          {experiences.map(experience => (
-            <div key={experience.id} className="experience-card">
+          {experiences.map((experience, index) => (
+            <div key={experience.id} className="experience-card reveal" style={{ transitionDelay: `${(index % 2) * 0.1}s` }}>
               <div className="experience-image">
-                <img 
-                  src={experience.image} 
+                <img
+                  src={experience.image}
                   alt={experience.title}
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGM0YzIi8+CjxyZWN0IHg9IjE1MCIgeT0iMTI1IiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiByeD0iNSIgZmlsbD0iIzQyODFBNCIvPgo8dGV4dCB4PSIyMDAiIHk9IjE1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW1hZ2U8L3RleHQ+Cjwvc3ZnPgo=';
                   }}
                 />
                 <div className="experience-date">{experience.date}</div>
               </div>
-              
+
               <div className="experience-content">
                 <h3 className="experience-title">{experience.title}</h3>
                 <div className={`experience-description-container ${expandedExperiences.has(experience.id) ? 'expanded' : ''}`}>
@@ -87,7 +89,7 @@ const Life: React.FC = () => {
                     {experience.description}
                   </p>
                   {experience.description.length > 120 && (
-                    <button 
+                    <button
                       className="experience-expand-button"
                       onClick={() => toggleExperienceExpanded(experience.id)}
                     >
@@ -95,7 +97,7 @@ const Life: React.FC = () => {
                     </button>
                   )}
                 </div>
-                
+
                 <div className="experience-tags">
                   {experience.tags.map((tag, index) => (
                     <span key={index} className="experience-tag">{tag}</span>
@@ -106,8 +108,8 @@ const Life: React.FC = () => {
           ))}
         </div>
       </div>
-      
-      <div className="life-gallery">
+
+      <div className="life-gallery reveal" style={{ transitionDelay: '1s' }}>
         <h2>Life in Pictures</h2>
         <div className="gallery-grid">
           <div className="gallery-item">

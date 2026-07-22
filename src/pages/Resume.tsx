@@ -4,15 +4,15 @@ import '../styles/shared.css';
 
 const Resume: React.FC = () => {
   return (
-    <div className="page-container">
+    <div className="page-container resume-container">
       <div className="page-header">
-        <h1>My Resume</h1>
-        <p>Professional Experience & Education</p>
+        <h1 className="reveal" style={{ transitionDelay: '0.1s' }}>My Resume</h1>
+        <p className="reveal" style={{ transitionDelay: '0.2s' }}>Professional Experience & Education</p>
       </div>
-      
+
       <div className="resume-content">
 
-        <section className="resume-section">
+        <section className="resume-section reveal" style={{ transitionDelay: '0s' }}>
           <h2>Work Experience</h2>
           <div className="timeline-item">
             <div className="timeline-date">2023 - Present</div>
@@ -26,7 +26,7 @@ const Resume: React.FC = () => {
               </ul>
             </div>
           </div>
-          
+
           <div className="timeline-item">
             <div className="timeline-date">2021 - 2023</div>
             <div className="timeline-content">
@@ -41,7 +41,7 @@ const Resume: React.FC = () => {
           </div>
         </section>
 
-        <section className="resume-section">
+        <section className="resume-section reveal" style={{ transitionDelay: '0.1s' }}>
           <h2>Education</h2>
           <div className="timeline-item">
             <div className="timeline-date">2019 - 2021</div>
@@ -51,7 +51,7 @@ const Resume: React.FC = () => {
               <p>專注於網路技術與系統開發研究</p>
             </div>
           </div>
-          
+
           <div className="timeline-item">
             <div className="timeline-date">2015 - 2019</div>
             <div className="timeline-content">
@@ -62,11 +62,11 @@ const Resume: React.FC = () => {
           </div>
         </section>
 
-        <section className="resume-section">
+        <section className="resume-section reveal" style={{ transitionDelay: '0.2s' }}>
           <h2>Skills</h2>
-          <div className="skills-grid">
-            <div className="skill-category">
-              <h3>Frontend</h3>
+          <div className="skills-rows">
+            <div className="skill-row">
+              <div className="skill-row-label">Frontend</div>
               <div className="skills-list">
                 <span className="skill-tag">React</span>
                 <span className="skill-tag">TypeScript</span>
@@ -75,8 +75,8 @@ const Resume: React.FC = () => {
                 <span className="skill-tag">Vue.js</span>
               </div>
             </div>
-            <div className="skill-category">
-              <h3>Backend</h3>
+            <div className="skill-row">
+              <div className="skill-row-label">Backend</div>
               <div className="skills-list">
                 <span className="skill-tag">Node.js</span>
                 <span className="skill-tag">Python</span>
@@ -85,8 +85,8 @@ const Resume: React.FC = () => {
                 <span className="skill-tag">Database</span>
               </div>
             </div>
-            <div className="skill-category">
-              <h3>Network & Systems</h3>
+            <div className="skill-row">
+              <div className="skill-row-label">Network & Systems</div>
               <div className="skills-list">
                 <span className="skill-tag">Network Management</span>
                 <span className="skill-tag">System Integration</span>
@@ -94,8 +94,8 @@ const Resume: React.FC = () => {
                 <span className="skill-tag">Linux</span>
               </div>
             </div>
-            <div className="skill-category">
-              <h3>Tools & Others</h3>
+            <div className="skill-row">
+              <div className="skill-row-label">Tools & Others</div>
               <div className="skills-list">
                 <span className="skill-tag">Git</span>
                 <span className="skill-tag">Docker</span>
@@ -106,20 +106,29 @@ const Resume: React.FC = () => {
           </div>
         </section>
 
-        <section className="resume-section">
+        <section className="resume-section reveal" style={{ transitionDelay: '0.3s' }}>
           <h2>Achievements</h2>
-          <div className="achievements-list">
+          <div className="achievements-flow">
             <div className="achievement-item">
-              <h3>Enterprise Network Management System</h3>
-              <p>主導開發企業級網路管理系統，提升系統效能並改善使用者體驗</p>
+              <div className="achievement-symbol">//</div>
+              <div className="achievement-body">
+                <h3>Enterprise Network Management System</h3>
+                <p>主導開發企業級網路管理系統，提升系統效能並改善使用者體驗</p>
+              </div>
             </div>
             <div className="achievement-item">
-              <h3>Network Platform Integration</h3>
-              <p>成功整合多個網路設備管理平台，實現關鍵功能模組</p>
+              <div className="achievement-symbol">//</div>
+              <div className="achievement-body">
+                <h3>Network Platform Integration</h3>
+                <p>成功整合多個網路設備管理平台，實現關鍵功能模組</p>
+              </div>
             </div>
             <div className="achievement-item">
-              <h3>Research & Development</h3>
-              <p>碩士期間專注於網路技術研究，為後續職業發展奠定堅實基礎</p>
+              <div className="achievement-symbol">//</div>
+              <div className="achievement-body">
+                <h3>Research & Development</h3>
+                <p>碩士期間專注於網路技術研究，為後續職業發展奠定堅實基礎</p>
+              </div>
             </div>
           </div>
         </section>

@@ -4,20 +4,37 @@
 
 .navigation {
   width: 100%;
-  background-color: rgba(243, 243, 243, 0.6);
-  backdrop-filter: blur(10px);
-  position: relative;
-  z-index: 100;
+  position: fixed; /* Fixed to stay on top */
+  top: 0;
+  left: 0;
+  z-index: 900; /* Lower than Modal (1000) */
   padding: 1rem 2rem;
+  transition: all 0.3s ease;
+  
+  /* Transparent - Buttons will float */
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: none;
+  box-shadow: none;
+  
+  /* Make pointer events pass through empty space so we can click things behind */
+  pointer-events: none;
+}
+
+/* Re-enable pointer events for interactive children */
+.nav-container {
+  pointer-events: auto;
 }
 
 .nav-container {
   position: relative;
-  max-width: 95%;
-  /* margin: 0 auto; */
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;  /* 左右分佈 */
+  justify-content: space-between;
+  pointer-events: auto; /* Ensure contents are clickable */
 }
 
 /* ========================================
@@ -27,16 +44,21 @@
 .nav-logo {
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--text-color);
   text-decoration: none;
-  letter-spacing: 0.5px;
+  z-index: 1001; /* Ensure above mobile menu */
 }
 
-.nav-logo-image{
-    padding-top: 10px;
-    height: 40px;
+.nav-logo-image {
+  height: 40px;
+  width: auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 8px rgba(224, 122, 95, 0.3));
+}
+
+.nav-logo:hover .nav-logo-image {
+  transform: scale(1.2) rotate(-2deg);
+  filter: drop-shadow(0 4px 15px rgba(224, 122, 95, 0.6))
+          drop-shadow(0 2px 4px rgba(244, 211, 94, 0.3));
 }
 
 /* ========================================
@@ -49,6 +71,7 @@
   padding: 0;
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .nav-item {
@@ -56,55 +79,56 @@
 }
 
 /* ========================================
-   Navigation Buttons
+   Navigation Buttons (Pill Shape)
    ======================================== */
 
+/* Navigation Buttons (Pill Shape with Liquid Glass) */
+
 .nav-button {
-  background: none;
-  border: none;
-  padding: 0.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.3); /* Base semi-transparent */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  
+  padding: 0.6rem 1.2rem;
   font-size: 0.95rem;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--text-color);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
   position: relative;
-  opacity: 0.7;
-  letter-spacing: 0.5px;
   text-decoration: none;
   display: block;
+  border-radius: 50px; /* Pill shape */
+  font-family: var(--font-main);
+  z-index: 1; /* Keep individual button's stack context low */
 }
 
-.nav-button::after {
-  content: '';
-  position: absolute;
-  bottom: 4px;        /* 從 8px 改為 4px，讓線條更靠近底部 */
-  left: 50%;
-  width: 0;           /* 初始寬度為 0 */
-  height: 2px;        /* 線條高度 2px */
-  background-color: var(--accent-color-1);  /* 使用主色調 #ED6A5A */
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateX(-50%);  /* 水平居中 */
-}
-
+/* Hover Effect */
 .nav-button:hover {
-  opacity: 1;
+  color: var(--accent-color-4);
+  background-color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
   transform: translateY(-1px);
 }
 
-.nav-button:hover::after {
-  width: 70%;
-}
-
+/* Active State - Pill */
 .nav-button.active {
-  opacity: 1;
-  color: var(--accent-color-1);
-  font-weight: 500;
+  color: white;
+  background: var(--gradient-main);
+  box-shadow: 0 4px 15px rgba(224, 122, 95, 0.3);
+  border-color: transparent;
+  transform: translateY(-1px);
+  /* Ensure active button doesn't jump on top of modal */
+  z-index: 1; 
 }
 
-.nav-button.active::after {
-  width: 70%;
+/* Remove old underline */
+.nav-button::after {
+  display: none;
 }
 
 /* ========================================
@@ -113,8 +137,8 @@
 
 .mobile-menu-toggle {
   display: none;
-  position: absolute;
-  right: 0;
+  position: relative;
+  z-index: 1001;
   background: none;
   border: none;
   cursor: pointer;
@@ -128,11 +152,11 @@
 .mobile-menu-toggle span {
   display: block;
   height: 2px;
-  width: 22px;
+  width: 24px;
   background-color: var(--text-color);
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 1px;
+  border-radius: 2px;
 }
 
 .mobile-menu-toggle span:last-child {
@@ -141,7 +165,8 @@
 
 /* Hamburger Animation */
 .mobile-menu-toggle.open span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+  transform: rotate(45deg) translate(5px, 6px);
+  background-color: var(--accent-color-1);
 }
 
 .mobile-menu-toggle.open span:nth-child(2) {
@@ -150,124 +175,90 @@
 }
 
 .mobile-menu-toggle.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+  transform: rotate(-45deg) translate(5px, -6px);
+  background-color: var(--accent-color-1);
 }
 
 /* ========================================
    Responsive Design
    ======================================== */
 
-/* Large Screens (1200px+) */
-@media (min-width: 1200px) {
-  .navigation {
-    padding: 0.6rem 3rem;
-  }
-  
-  .nav-button {
-    padding: 0.6rem 1.8rem;
-    font-size: 1rem;
-  }
-}
-
-/* Tablets (769px - 1024px) */
-@media (max-width: 1024px) {
-  .navigation {
-    padding: 0.6rem 1.5rem;
-  }
-  
-  .nav-button {
-    padding: 0.8rem 1.2rem;
-    font-size: 0.9rem;
-  }
-}
-
-/* Mobile Devices (768px and below) */
 @media (max-width: 768px) {
   .navigation {
-    padding: 0.6rem 1.5rem;
-    background-color: rgba(243, 243, 243, 0.8);
+    padding: 0.8rem 1.25rem;
   }
-  
-  .nav-container {
-    position: relative;
-  }
-  
-  .nav-logo {
-    font-size: 1.3rem;
-  }
-  
-  .mobile-menu-toggle {
-    display: flex;
-    position: relative;
-    right: auto;
-  }
-  
+
   .nav-list {
-    position: absolute;
-    top: 100%;
-    right: 1rem;
-    border-radius: 12px;
-    background-color: rgba(243, 243, 243, 0.85);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.10), 0 1.5px 6px rgba(0,0,0,0.08);
-    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    background: rgba(253, 251, 247, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 0;
-    width: 80vw;
-    max-width: 120px;
-    min-width: 120px;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    margin-top: 0rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    gap: 2rem;
+    padding: 2rem;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+    
+    /* Transform transition for sliding in */
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 200;
   }
   
   .nav-list.mobile-open {
+    transform: translateX(0);
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
   }
   
   .nav-item {
     width: 100%;
-    max-width: 80%;
-  }
-  
-  .nav-button {
-    width: 100%;
-    right: 1rem;
-    font-size: 0.95rem;
     text-align: center;
-    opacity: 0.8;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.4s ease;
   }
-  
-  .nav-button::after {
-    display: none;
-  }
-  
-  .nav-button.active {
-    background-color: rgba(237, 106, 90, 0.1);
-    border-radius: 8px;
+
+  /* Staggered animation for menu items */
+  .nav-list.mobile-open .nav-item {
     opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Delays for each item */
+  .nav-list.mobile-open .nav-item:nth-child(1) { transition-delay: 0.1s; }
+  .nav-list.mobile-open .nav-item:nth-child(2) { transition-delay: 0.15s; }
+  .nav-list.mobile-open .nav-item:nth-child(3) { transition-delay: 0.2s; }
+  .nav-list.mobile-open .nav-item:nth-child(4) { transition-delay: 0.25s; }
+  .nav-list.mobile-open .nav-item:nth-child(5) { transition-delay: 0.3s; }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .nav-button {
+    font-size: 1.2rem;
+    padding: 1rem;
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .nav-button.active {
+    background: var(--gradient-main);
+    color: white;
   }
 }
 
-/* Small Mobile Devices (480px and below) */
 @media (max-width: 480px) {
   .navigation {
-    padding: 0.6rem 1rem;
-  }
-  
-  .nav-list {
-    padding: 1rem;
-  }
-  
-  .nav-button {
-    padding: 0.8rem;
-    font-size: 0.9rem;
+    padding: 0.8rem 1rem;
   }
 }
+
