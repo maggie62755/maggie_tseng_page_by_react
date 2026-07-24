@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FiHome, FiBriefcase, FiFileText, FiCamera, FiMail } from "react-icons/fi";
 import "./Navigation.css";
 
