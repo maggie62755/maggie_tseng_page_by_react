@@ -25,8 +25,8 @@ function App() {
     
     const observerOptions = {
       root: null,
-      rootMargin: '-20% 0px -40% 0px', // Active section when it enters viewport center
-      threshold: 0.1
+      rootMargin: '-50% 0px -49% 0px', // Creates a 1% height trigger band in the middle of the screen
+      threshold: 0
     };
 
     const sectionObserver = new IntersectionObserver((entries) => {

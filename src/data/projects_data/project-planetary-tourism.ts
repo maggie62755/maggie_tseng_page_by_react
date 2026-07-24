@@ -47,7 +47,7 @@ export const planetaryTourism: ProjectBase = {
     technologies: ["JS", "HTML"],
     status: "Completed",
     date: "2024/10",
-    image: "images/projects/planetary-tourism.png",
+    image: `${import.meta.env.BASE_URL}images/projects/planetary-tourism.png`,
     link: "https://choutw.github.io/pto2023/login",
     sourceCode: "#"
 };

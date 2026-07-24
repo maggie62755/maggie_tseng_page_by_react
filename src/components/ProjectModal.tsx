@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Modal from './Modal';
 import './ProjectModal.css';
 import type { Project, ProjectContent } from '../data/project-index';
@@ -101,7 +102,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
     }
   };
 
-  return (
+  return createPortal(
     <>
       <Modal
         isOpen={isOpen}
@@ -172,7 +173,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
           </div>
         </div>
       )}
-    </>
+    </>,
+    document.body
   );
 };
 

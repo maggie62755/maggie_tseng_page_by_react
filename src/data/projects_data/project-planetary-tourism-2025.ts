@@ -26,22 +26,22 @@ export const planetaryTourism2025: ProjectBase = {
         },
         {
             type: 'image',
-            src: 'images/projects/planetary-tourism-2025-login.png',
+            src: `${import.meta.env.BASE_URL}images/projects/planetary-tourism-2025-login.png`,
             alt: 'Login page of the planetary tourism 2025'
         },
         {
             type: 'image',
-            src: 'images/projects/planetary-tourism-2025-game.png',
+            src: `${import.meta.env.BASE_URL}images/projects/planetary-tourism-2025-game.png`,
             alt: 'Gameboard page of the planetary tourism 2025'
         },
         {
             type: 'image',
-            src: 'images/projects/planetary-tourism-2025-des.png',
+            src: `${import.meta.env.BASE_URL}images/projects/planetary-tourism-2025-des.png`,
             alt: 'Activity description of the planetary tourism 2025'
         },
         {
             type: 'image',
-            src: 'images/projects/planetary-tourism-2025-game-over.png',
+            src: `${import.meta.env.BASE_URL}images/projects/planetary-tourism-2025-game-over.png`,
             alt: 'Game over of the planetary tourism 2025'
         },
         {
@@ -54,7 +54,7 @@ export const planetaryTourism2025: ProjectBase = {
     ],
     technologies: ["JS", "TS", "CSS", "REACT", "HTML", "Copilot"],
     status: "Completed",
-    image: "images/projects/planetary-tourism-2025-game.png",
+    image: `${import.meta.env.BASE_URL}images/projects/planetary-tourism-2025-game.png`,
     link: "https://maggie62755.github.io/pto2025/",
     sourceCode: "#",
     date: "2025/12"

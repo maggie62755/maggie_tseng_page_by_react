@@ -22,12 +22,12 @@ export const smartUmbrellaStand: ProjectBase = {
         },
         {
             type: 'image',
-            src: 'images/projects/smart_umbrella_stand_top.jpeg',
+            src: `${import.meta.env.BASE_URL}images/projects/smart_umbrella_stand_top.jpeg`,
             alt: 'top view of the umbrella stand prototype'
         },
         {
             type: 'image',
-            src: 'images/projects/smart_umbrella_stand_left.jpeg',
+            src: `${import.meta.env.BASE_URL}images/projects/smart_umbrella_stand_left.jpeg`,
             alt: 'side view of the umbrella stand prototype'
         },
         {
@@ -47,7 +47,7 @@ export const smartUmbrellaStand: ProjectBase = {
     technologies: ["C", "C++", "Python", "IoT", "Raspberry Pi 3", "MongoDB", "API"],
     status: "Completed",
     date: "2021/06",
-    image: "images/projects/smart_umbrella_stand.jpeg",
+    image: `${import.meta.env.BASE_URL}images/projects/smart_umbrella_stand.jpeg`,
     link: "https://github.com/maggie62755/Adaptive-MQTT-Transmit-Policy",
     sourceCode: "https://github.com/maggie62755/Adaptive-MQTT-Transmit-Policy"
 };

@@ -62,7 +62,7 @@ export const maggieThesis: ProjectBase = {
     technologies: ["C", "C++", "MQTT", "Mosquitto"],
     status: "Completed",
     date: "2022/06",
-    image: "images/projects/maggie_thesis.png",
+    image: `${import.meta.env.BASE_URL}images/projects/maggie_thesis.png`,
     link: "https://github.com/maggie62755/Adaptive-MQTT-Transmit-Policy",
     sourceCode: "https://github.com/maggie62755/Adaptive-MQTT-Transmit-Policy"
 };

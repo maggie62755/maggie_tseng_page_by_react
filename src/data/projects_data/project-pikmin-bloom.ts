@@ -18,29 +18,29 @@ export const smartUmbrellaStand: ProjectBase = {
         },
         {
             type: 'image',
-            src: 'images/projects/pikmin_bloom_home.png',
+            src: `${import.meta.env.BASE_URL}images/projects/pikmin_bloom_home.png`,
             alt: 'home page of the Pikmin Bloom Decor Tracker'
         },
         {
             type: 'image',
-            src: 'images/projects/pikmin_bloom_how_to.png',
+            src: `${import.meta.env.BASE_URL}images/projects/pikmin_bloom_how_to.png`,
             alt: 'how to use the Pikmin Bloom Decor Tracker'
         },
         {
             type: 'image',
-            src: 'images/projects/pikmin_bloom_tracker_card.png',
+            src: `${import.meta.env.BASE_URL}images/projects/pikmin_bloom_tracker_card.png`,
             alt: 'Card view of the Pikmin Bloom Decor Tracker'
         },
         {
             type: 'image',
-            src: 'images/projects/pikmin_bloom_tracker_list.png',
+            src: `${import.meta.env.BASE_URL}images/projects/pikmin_bloom_tracker_list.png`,
             alt: 'List view of the Pikmin Bloom Decor Tracker'
         }
     ],
     technologies: ["HTML", "CSS", "JavaScript", "API", "Firebase"],
     status: "Completed",
     date: "2025/12",
-    image: "images/projects/pikmin_bloom_home.png",
+    image: `${import.meta.env.BASE_URL}images/projects/pikmin_bloom_home.png`,
     link: "https://maggie62755.github.io/Pikmin-Bloom-Decor-Tracker",
     sourceCode: "https://github.com/maggie62755/Pikmin-Bloom-Decor-Tracker"
 };

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FiHome, FiBriefcase, FiFileText, FiCamera, FiMail } from "react-icons/fi";
 import "./Navigation.css";
 
 interface NavigationProps {
@@ -7,20 +8,17 @@ interface NavigationProps {
 }
 
 const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const tabs = [
-    { id: "home", label: "Home" },
-    { id: "projects", label: "Projects" },
-    { id: "resume", label: "Resume" },
-    { id: "life", label: "Life" },
-    { id: "contact", label: "Contact" },
+    { id: "home", label: "Home", icon: <FiHome /> },
+    { id: "projects", label: "Projects", icon: <FiBriefcase /> },
+    { id: "resume", label: "Resume", icon: <FiFileText /> },
+    { id: "life", label: "Life", icon: <FiCamera /> },
+    { id: "contact", label: "Contact", icon: <FiMail /> },
   ];
 
   const handleTabChange = (e: React.MouseEvent<HTMLAnchorElement>, tab: string) => {
     e.preventDefault();
     onTabChange(tab);
-    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -31,19 +29,10 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
           className="nav-logo"
           onClick={(e) => handleTabChange(e, 'home')}
         >
-          <img src="images/logo/logo_by_germini.png" alt="Maggie" className="nav-logo-image" />
+          <img src={`${import.meta.env.BASE_URL}images/logo/logo_by_germini.png`} alt="Maggie" className="nav-logo-image" />
         </a>
 
-        <button
-          className={`mobile-menu-toggle ${isMobileMenuOpen ? "open" : ""}`}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <ul className={`nav-list ${isMobileMenuOpen ? "mobile-open" : ""}`}>
+        <ul className="nav-list">
           {tabs.map((tab) => (
             <li key={tab.id} className="nav-item">
               <a
@@ -51,7 +40,8 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
                 className={`nav-button ${activeTab === tab.id ? "active" : ""}`}
                 onClick={(e) => handleTabChange(e, tab.id)}
               >
-                {tab.label}
+                <span className="nav-icon">{tab.icon}</span>
+                <span className="nav-label">{tab.label}</span>
               </a>
             </li>
           ))}

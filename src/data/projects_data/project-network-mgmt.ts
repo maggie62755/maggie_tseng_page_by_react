@@ -80,6 +80,6 @@ export const networkManagement: ProjectBase = {
     technologies: ["Next.js", "React", "TypeScript", "Ant Design", "D3.js"],
     status: "In Progress",
     date: "2025/10",
-    image: "images/projects/genix_biz_home.png",
+    image: `${import.meta.env.BASE_URL}images/projects/genix_biz_home.png`,
     link: "#"
 };

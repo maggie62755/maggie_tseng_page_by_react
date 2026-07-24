@@ -7,7 +7,7 @@ const Home: React.FC = () => {
       <div className="profile-section">
         <div className="avatar-container reveal">
           <img
-            src="images/maggie.jpeg"
+            src={`${import.meta.env.BASE_URL}images/maggie.jpeg`}
             alt="Maggie Tseng"
             className="avatar-image"
           />
