@@ -42,6 +42,15 @@
   margin-bottom: 1.5rem;
 }
 
+.modal-description img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 1.5rem auto;
+  border: none;
+}
+
 /* Detailed Content Styles */
 .modal-paragraph {
   margin-bottom: 1rem;
@@ -305,6 +314,47 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+.lightbox-controls {
+  position: absolute;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 100002;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.zoom-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.zoom-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.lightbox-transform-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @keyframes lightboxFadeIn {
   from {
     opacity: 0;
@@ -324,3 +374,4 @@
     opacity: 1;
   }
 }
+

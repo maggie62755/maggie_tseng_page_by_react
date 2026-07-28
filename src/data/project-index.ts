@@ -1,10 +1,13 @@
 // 匯出型別
-export type { Project, ProjectBase, ProjectContent } from './project-types';
+export type { Project, ProjectBase } from './project-types';
 
 import type { ProjectBase, Project } from './project-types';
+import frontMatter from 'front-matter';
 
-// 自動匯入 projects_data 資料夾中所有 .ts 檔案（使用具名匯出）
-const projectModulesNamed = import.meta.glob<{ [key: string]: ProjectBase }>('./projects_data/*.ts', { 
+// 自動匯入 projects_data 資料夾中所有 .md 檔案（以字串形式）
+const projectModulesRaw = import.meta.glob('./projects_data/*.md', { 
+    query: '?raw', 
+    import: 'default',
     eager: true 
 });
 
@@ -16,14 +19,16 @@ function assignIds(projects: ProjectBase[]): Project[] {
     }));
 }
 
-// 從所有模組中提取專案資料（排除 types.ts）
-const projectsList: ProjectBase[] = Object.entries(projectModulesNamed)
-    .filter(([path]) => !path.includes('types.ts') && !path.includes('index.ts'))
-    .flatMap(([, module]) => 
-        Object.values(module).filter((value): value is ProjectBase => 
-            typeof value === 'object' && value !== null && 'title' in value
-        )
-    )
+// 從所有 markdown 模組中提取專案資料
+const projectsList: ProjectBase[] = Object.values(projectModulesRaw)
+    .map((rawContent: any) => {
+        // rawContent 應該是 string
+        const parsed = frontMatter<ProjectBase>(rawContent as string);
+        return {
+            ...parsed.attributes,
+            content: parsed.body
+        };
+    })
     .sort((a, b) => {
         // 沒有 date 的排在最後
         if (!a.date) return 1;

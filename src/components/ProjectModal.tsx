@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Modal from './Modal';
 import './ProjectModal.css';
-import type { Project, ProjectContent } from '../data/project-index';
+import type { Project } from '../data/project-index';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
 
 interface ProjectModalProps {
   project: Project | null;
@@ -12,6 +16,7 @@ interface ProjectModalProps {
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
+
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -24,83 +29,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
   }, [lightboxImage]);
 
   if (!project) return null;
-
-  const renderContent = (content: ProjectContent, index: number) => {
-    switch (content.type) {
-      case 'paragraph':
-        return <p key={index} className="modal-paragraph">{content.content}</p>;
-      
-      case 'heading':
-        return <h3 key={index} className="modal-heading">{content.content}</h3>;
-      
-      case 'list':
-        return (
-          <ul key={index} className="modal-list">
-            {content.items?.map((item, i) => (
-              <li key={i}>{item}</li>
-            ))}
-          </ul>
-        );
-      
-      case 'image':
-        return (
-          <div key={index} className="modal-content-image-wrapper">
-            <img 
-              src={content.src} 
-              alt={content.alt || 'Project image'}
-              className="modal-content-image zoomable-image"
-              onClick={() => {
-                if (content.src) {
-                  setLightboxImage({ src: content.src, alt: content.alt || '' });
-                }
-              }}
-              onError={(e) => {
-                e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDYwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGM0YzIi8+CjxyZWN0IHg9IjI1MCIgeT0iMTI1IiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiByeD0iNSIgZmlsbD0iIzQyODFBNCIvPgo8dGV4dCB4PSIzMDAiIHk9IjE1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW1hZ2U8L3RleHQ+Cjwvc3ZnPgo=';
-              }}
-            />
-            {content.alt && <p className="modal-image-caption">{content.alt}</p>}
-          </div>
-        );
-      
-
-      case 'link':
-        if (content.links && Array.isArray(content.links)) {
-          return (
-            <div key={index} className="modal-link-wrapper">
-              {content.links.map((link, i) => (
-                <a
-                  key={i}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="modal-link"
-                >
-                  {link.text || link.url}
-                </a>
-              ))}
-            </div>
-          );
-        } else if (content.url) {
-          return (
-            <div key={index} className="modal-link-wrapper">
-              <a
-                href={content.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="modal-link"
-              >
-                {content.text || content.url}
-              </a>
-            </div>
-          );
-        } else {
-          return null;
-        }
-      
-      default:
-        return null;
-    }
-  };
 
   return createPortal(
     <>
@@ -137,8 +65,25 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
         </div>
 
         <div className="modal-description">
-          {project.detailedContent ? (
-            project.detailedContent.map((content, index) => renderContent(content, index))
+          {project.content ? (
+            <ReactMarkdown 
+              remarkPlugins={[remarkGfm]}
+              components={{
+                img: ({node, ...props}) => (
+                  <img 
+                    {...props} 
+                    className="zoomable-image" 
+                    onClick={() => {
+                      if (props.src) {
+                        setLightboxImage({ src: props.src, alt: props.alt || '' });
+                      }
+                    }} 
+                  />
+                )
+              }}
+            >
+              {project.content}
+            </ReactMarkdown>
           ) : (
             <p className="modal-paragraph">{project.description}</p>
           )}
@@ -163,12 +108,35 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
             &times;
           </button>
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <img 
-              src={lightboxImage.src} 
-              alt={lightboxImage.alt} 
-              className="lightbox-image"
-              onClick={() => setLightboxImage(null)}
-            />
+            <TransformWrapper
+              initialScale={1}
+              maxScale={500}
+              minScale={0.5}
+              wheel={{ step: 0.1 }}
+              doubleClick={{ step: 2 }}
+              panning={{ disabled: false }}
+            >
+              {({ zoomIn, zoomOut, resetTransform }) => (
+                <>
+                  <div className="lightbox-controls">
+                    <button className="zoom-btn" onClick={() => zoomIn()}>+</button>
+                    <button className="zoom-btn" onClick={() => zoomOut()}>-</button>
+                    <button className="zoom-btn" onClick={() => resetTransform()}>⟲</button>
+                  </div>
+                  <TransformComponent wrapperClass="lightbox-transform-wrapper">
+                    <img 
+                      src={lightboxImage.src} 
+                      alt={lightboxImage.alt} 
+                      className="lightbox-image"
+                      style={{ cursor: 'grab' }}
+                      onMouseDown={(e) => e.currentTarget.style.cursor = 'grabbing'}
+                      onMouseUp={(e) => e.currentTarget.style.cursor = 'grab'}
+                      onMouseLeave={(e) => e.currentTarget.style.cursor = 'grab'}
+                    />
+                  </TransformComponent>
+                </>
+              )}
+            </TransformWrapper>
             {lightboxImage.alt && <p className="lightbox-caption">{lightboxImage.alt}</p>}
           </div>
         </div>
