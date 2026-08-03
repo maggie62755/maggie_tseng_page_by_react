@@ -1,32 +1,79 @@
 ---
 title: "Genix Home AI Voice Assistant"
 description: "A real-time voice-activated customer service assistant designed for GenixNetworks home router management. Powered by the Gemini 2.5 Flash Native Audio model and LiveKit, this agent empowers users to manage their home networks, configure parental controls, analyze traffic, and troubleshoot issues entirely through natural, low-latency conversational voice commands."
-technologies: ["Python","LiveKit","Gemini 2.5 Flash","Docker","GitLab CI","JWT","RAG"]
+technologies:
+  ["Python", "LiveKit", "Gemini 2.5 Flash", "Docker", "GitLab CI", "JWT", "RAG"]
 status: "Completed"
 date: "2026/01-2026/07"
 image: "images/projects/genix_livekit.png"
 link: "https://gemini-live.genixnetworks.cloud/"
 ---
 
-### Core Capabilities (核心功能)
+## **Instruction**
 
-- Advanced Parental Controls & Network Access: Supports creating user profiles, assigning devices, and setting complex schedules (e.g., configuring weekly bedtimes or temporarily pausing internet access for specific profiles).
-- Vulnerability Scanning & Security: Users can trigger network or device-specific security scans and receive easy-to-understand summaries of open ports or potential risks.
-- Traffic & Usage Analysis: Provides insights into bandwidth usage, top applications, category distribution, and active devices by querying historical data (up to 30 days).
-- Wi-Fi & Device Management: Allows users to securely query or change Wi-Fi passwords, SSIDs, and manage connected devices conversationally.
-- Troubleshooting (RAG): Integrates a knowledge base to help users diagnose hardware issues (like router LED indicators) or connection drops without navigating complex manuals.
+A real-time AI customer service agent built for GenixNetworks. Powered by **LiveKit** and **Gemini 2.5 Flash Native Audio** , it allows users to manage their routers through natural, hands-free voice conversations.
 
-### Flow
+## **Feature**
+
+- **Network Setup** : Wi-Fi password and SSID management.
+- **Device Management** : Monitor connected devices, rename devices, and control internet access.
+- **Parental Controls** : Schedule weekly internet downtimes (Bed Time) for specific profiles or devices.
+- **Security & Diagnostics** : Vulnerability scanning, traffic analysis, and hardware troubleshooting.
+- **Network Setup** : Wi-Fi password and SSID management.
+- **Device Management** : Monitor connected devices, rename devices, and control internet access.
+- **Parental Controls** : Schedule weekly internet downtimes (Bed Time) for specific profiles or devices.
+- **Security & Diagnostics** : Vulnerability scanning, traffic analysis, and hardware troubleshooting.
+
+Highlight
+
+- **Ultra-low Latency Audio**
+  - Integrates LiveKit Cloud and Gemini 2.5 to deliver bidirectional, interruptible, human-like voice interactions.
+- **Dynamic Tool Calling**
+  - Accurately recognizes user intents to execute complex tasks and queries on the fly.
+- **Retrieval-Augmented Generation (RAG)**
+  - Connects to product manuals to provide instant, precise troubleshooting for hardware issues.
+
+## **Flow**
 
 ![Flowchart of the LiveKit agent](images/projects/genix_livekit_diagram.png)
 
-### Real-World Use Cases (真實使用情境)
+## **Use Cases**
 
 - Smart Scheduling: User: "Block internet for the Kids profile every Wednesday from 8 to 9 PM." -> The agent automatically parses the timezone and sets a recurring API rule.
 - Network Monitoring: User: "What device is most active on my network?" or "How much data is my iPhone using?" -> The agent retrieves and summarizes the specific usage metrics.
 - Security Operations: User: "Show vulnerability scan results for my NAS." -> Agent: "Port 445 (SMB) is open on your NAS. This is a high-risk port — I recommend securing it."
 
-### Example
+## **Challenges & Solutions**
+
+#### Handling Missing Hardware Features
+
+- **Problem**: Users often ask to "pause the internet for 30 minutes," but the router API doesn't support temporary, one-time pauses.
+- **Solution**: Implemented an intent-translation mechanism. The AI explains the limitation and guides the user to set up a recurring "Bed Time" schedule instead, always previewing changes before execution.
+
+#### API Pre-checks & State Management
+
+- **Problem**: Calling backend APIs without a selected router ID (Box ID) leads to invalid API paths and failed requests.
+- **Solution**: Added a pre-check interception layer. If the Box ID is missing, the AI automatically pauses the action and speaks to the user to ask for the correct device, resuming the task only after confirmation.
+
+#### Timestamp & Timezone Accuracy
+
+- **Problem**: APIs return UNIX Timestamps. Relying on the LLM to calculate human-readable time led to hallucinations. Furthermore, user timezones varied.
+- **Solution**:
+  Built a dedicated Time-Conversion Tool for precise logic-based calculation.
+  The frontend dynamically passes the user's local timezone during initialization, ensuring the AI always speaks the 100% accurate local time.
+
+#### Scope Limiting & Prompt Injection Defense
+
+- **Problem**: Users might ask questions completely unrelated to routers or attempt unauthorized commands (e.g., asking the AI to write code or reveal system instructions).
+- **Solution**: Implemented a strict Scope Guard. When detecting off-topic requests, the AI politely refuses and redirects the conversation back to router management. It also blocks Prompt Injection attacks to ensure system security and reliability.
+
+## **Tech Stack**
+
+- **Core:** Python, LiveKit Agents SDK, JS, HTML
+- **AI/ML:** Google GenAI (Gemini 2.5 Flash Native Audio Preview), Silero VAD
+- **Architecture:** RAG, Function Calling, Docker, GitLab CI/CD
+
+## **Example**
 
 ![Wi-Fi QrCode generated by the agent](images/projects/genix_livekit_wifi_qrcode.png)
 
@@ -36,19 +83,6 @@ link: "https://gemini-live.genixnetworks.cloud/"
 
 ![Support show apps using timeline](images/projects/genix_livekit_apps_timeline.png)
 
-### Technical Implementation & Challenges (技術實作與克服挑戰)
-
-- Contextual Identity Management: Automatically parses JWT tokens to authenticate users, fetch authorized router IDs (Box IDs), and resolve user timezones to accurately execute time-sensitive commands.
-- Resilient Error Handling: To prevent silent failures during unexpected backend disconnections or "entity not found" exceptions, I implemented a custom Log Interceptor (GeminiErrorHandler). It actively monitors plugin logs and publishes a reliable WebSocket "reconnect_request" to the frontend, ensuring a graceful UI recovery.
-- Intelligent Guardrails: The agent is programmed with strict boundaries, gracefully refusing unrelated topics (e.g., weather queries), unsupported features, or prompt injection attempts ("Ignore your instructions..."), ensuring a secure and focused service.
-
-### Architecture & Deployment
-
-- Built with Python, LiveKit Agents SDK, and Google TTS (Chirp3 HD).
-- Supported containerized deployment using Docker and Docker Compose.
-- Implemented GitLab CI/CD workflow for automated deployments across separate Development and Production environments.
-
-### Live Demo
+## **Live Demo**
 
 [LiveKit Agent Pro Environment](https://gemini-live.genixnetworks.cloud/)
-
