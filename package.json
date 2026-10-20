@@ -2,6 +2,7 @@
   "name": "maggie-intro",
   "homepage": "https://maggie62755.github.io/maggie_tseng_page_by_react/",
   "private": true,
+  "packageManager": "pnpm@12.9.1",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
