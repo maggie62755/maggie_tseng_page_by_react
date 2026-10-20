@@ -4,6 +4,13 @@ import '../styles/shared.css';
 import ProjectModal from '../components/ProjectModal';
 import { projectsData } from '../data/project-index';
 
+const monthLabels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+const formatProjectDate = (date: string) =>
+  date.replace(/(\d{4})\/(0[1-9]|1[0-2])/g, (_, year, month) =>
+    `${year} ${monthLabels[Number(month) - 1]}`
+  ).replace(/-/g, ' – ');
+
 const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
 
@@ -51,7 +58,7 @@ const Projects: React.FC = () => {
 
             <div className="project-content">
               <h3 className="project-title">{project.title}</h3>
-              <div className="project-date">{project.date && (project.date)}</div>
+              <div className="project-date">{project.date && formatProjectDate(project.date)}</div>
               <div className="project-description-container">
                 <p className="project-description">
                   {project.description.length > 150

@@ -90,9 +90,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
         </div>
 
         <div className="modal-actions">
-          <a href={project.link} target="_blank" rel="noopener noreferrer" className="modal-action-button primary">
-            View Project
-          </a>
+          {project.link && (
+            <a href={project.link} target="_blank" rel="noopener noreferrer" className="modal-action-button primary">
+              View Project
+            </a>
+          )}
           {project.sourceCode && (
             <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" className="modal-action-button secondary">
               Source Code

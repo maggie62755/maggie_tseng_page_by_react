@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">On-Router AI and DIU Integration</title>
+<desc id="desc">The command gateway forwards text requests to AIZip Harness. The harness uses local llama-server instances for Gemma 3 1B on the NPU and two classifiers on the CPU. It calls Genix DIU API to integrate backend services. All shown components run on the router.</desc>
+<defs>
+<linearGradient id="bg" x2="1" y2="1"><stop stop-color="#102b39"/><stop offset="1" stop-color="#071721"/></linearGradient>
+<marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="#76d8c3"/></marker>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<text x="55" y="53" fill="#76d8c3" font-size="17" letter-spacing="3">LOCAL INFERENCE · LOCAL DEVICE CONTROL</text>
+<text x="55" y="109" fill="#f2f7fa" font-size="43" font-weight="700">On-Router AI &amp; DIU Integration</text>
+<rect x="40" y="140" width="1120" height="475" rx="22" fill="#102c39" stroke="#355261" stroke-width="2"/>
+<text x="65" y="174" fill="#b2c8d2" font-size="16" letter-spacing="2">ROUTER / LOCAL EXECUTION</text>
+<g fill="#183c4b" stroke="#496b7a">
+<rect x="75" y="229" width="250" height="110" rx="14"/>
+<rect x="445" y="229" width="280" height="110" rx="14"/>
+<rect x="840" y="195" width="285" height="90" rx="14"/>
+<rect x="840" y="310" width="285" height="90" rx="14"/>
+<rect x="75" y="454" width="300" height="115" rx="14"/>
+</g>
+<g text-anchor="middle" fill="#f2f7fa">
+<text x="200" y="273" font-size="25" font-weight="700">Command Gateway</text>
+<text x="200" y="307" font-size="19" fill="#b2c8d2">Text request / response</text>
+<text x="585" y="273" font-size="29" font-weight="700">AIZip Harness</text>
+<text x="585" y="307" font-size="19" fill="#b2c8d2">Interpret · Execute · Respond</text>
+<text x="982" y="230" font-size="23" font-weight="700">Gemma 3 1B · NPU</text>
+<text x="982" y="260" font-size="18" fill="#b2c8d2">llama-server / GGUF</text>
+<text x="982" y="345" font-size="22" font-weight="700">Two Classifiers · CPU</text>
+<text x="982" y="376" font-size="18" fill="#b2c8d2">Intent + Activity / llama-server</text>
+<text x="225" y="494" font-size="24" font-weight="700">Backend Services</text>
+<text x="225" y="526" font-size="20" fill="#b2c8d2">Network Management / DPI</text>
+<text x="225" y="552" font-size="20" fill="#b2c8d2">Router APIs</text>
+</g>
+<g fill="none" stroke="#76d8c3" stroke-width="2.5" marker-start="url(#arrow)" marker-end="url(#arrow)">
+<path d="M338 284 H432"/>
+<path d="M738 260 H783 V240 H827"/>
+<path d="M738 307 H783 V355 H827"/>
+<path d="M585 352 V441"/>
+<path d="M432 512 H388"/>
+</g>
+<text x="385" y="265" text-anchor="middle" fill="#b2c8d2" font-size="16">HTTP</text>
+<text x="610" y="401" fill="#76d8c3" font-size="20">Function calling</text>
+<rect x="445" y="454" width="395" height="115" rx="14" fill="#76d8c3"/>
+<g text-anchor="middle" fill="#102b39">
+<text x="642" y="480" font-size="14" letter-spacing="2">MY FOCUS · API INTEGRATION</text>
+<text x="642" y="517" font-size="31" font-weight="700">Genix DIU API</text>
+<text x="642" y="548" font-size="18">Mapping · Authentication · Results · Errors</text>
+</g>
+<text x="55" y="650" fill="#b2c8d2" font-size="17">On-device models and APIs · No cloud AI inference</text>
+<text x="1145" y="650" text-anchor="end" fill="#76d8c3" font-size="16">DIU bridges harness and backend services</text>
+</g>
+</svg>
